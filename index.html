@@ -1,307 +1,659 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ulrich Bryand Tamouffe Teyo — DevSecOps &amp; Cybersecurity Engineer</title>
 <meta name="description" content="DevSecOps and cybersecurity engineer in Douala, Cameroon. Software engineering degree, 1+ year across DevSecOps and data engineering. Python, PyTorch, Docker, AWS, Kubernetes, Terraform. Open to relocation to Canada.">
+<meta name="theme-color" content="#0a0b0f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0b0f'/><text x='50' y='68' font-size='52' font-family='monospace' font-weight='bold' fill='%2322d3ee' text-anchor='middle'>B</text></svg>">
 <style>
-  :root{
-    --bg:#ffffff; --fg:#16181d; --muted:#5b6270; --line:#e3e6ec;
-    --card:#fafbfc; --accent:#1f5fa8; --accent-soft:#eef4fb;
-    --ok:#0f6e56; --ok-soft:#e6f5f0;
-    --radius:12px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0f1115; --fg:#e8eaee; --muted:#98a0ae; --line:#262b33;
-      --card:#15181e; --accent:#7fb0ea; --accent-soft:#16222f;
-      --ok:#5dcaa5; --ok-soft:#12231d;
-    }
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size:16px; line-height:1.65;
-  }
-  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 80px; position:relative}
-  a{color:var(--accent); text-decoration:none}
-  a:hover{text-decoration:underline}
-  h1{font-size:30px; line-height:1.2; margin:0 0 6px; font-weight:600; letter-spacing:-.01em}
-  h2{font-size:13px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted);
-     font-weight:600; margin:44px 0 16px}
-  h3{font-size:16px; margin:0 0 4px; font-weight:600}
-  p{margin:0 0 12px}
-  ul{margin:0; padding-left:20px}
-  li{margin-bottom:5px}
+:root{
+  --bg:#0a0b0f;
+  --bg-soft:#0e1016;
+  --surface:#12141c;
+  --surface-2:#171a24;
+  --border:#232838;
+  --border-soft:#1a1e2a;
+  --text:#e9edf5;
+  --text-dim:#9aa3b8;
+  --text-faint:#5f6879;
+  --c1:#22d3ee;
+  --c2:#6366f1;
+  --c3:#a855f7;
+  --glow:rgba(34,211,238,.16);
+  --shadow:0 24px 60px -20px rgba(0,0,0,.75);
+  --r-sm:10px; --r:16px; --r-lg:24px;
+  --max:1080px;
+  --nav-h:68px;
+}
+html[data-theme="light"]{
+  --bg:#ffffff;
+  --bg-soft:#f8f9fc;
+  --surface:#ffffff;
+  --surface-2:#f4f6fa;
+  --border:#e4e7ee;
+  --border-soft:#eef1f6;
+  --text:#0b0e15;
+  --text-dim:#576072;
+  --text-faint:#8b93a4;
+  --glow:rgba(99,102,241,.12);
+  --shadow:0 20px 50px -24px rgba(20,30,60,.28);
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth; scroll-padding-top:96px; -webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s ease, color .4s ease;
+}
+a{color:inherit; text-decoration:none}
+::selection{background:var(--c1); color:#04070c}
+:focus-visible{outline:2px solid var(--c1); outline-offset:3px; border-radius:4px}
 
-  .lang{position:absolute; top:22px; right:24px; font-size:13px}
-  .lang button{
-    background:none; border:1px solid var(--line); color:var(--muted);
-    padding:4px 10px; border-radius:6px; cursor:pointer; font:inherit; font-size:12px;
-  }
-  .lang button[aria-pressed="true"]{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+/* ---------- ambient background ---------- */
+.ambient{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.ambient .blob{position:absolute; border-radius:50%; filter:blur(90px); opacity:.5}
+html[data-theme="light"] .ambient .blob{opacity:.32}
+.ambient .b1{width:620px; height:620px; background:var(--c2); top:-260px; left:-160px; animation:drift1 26s ease-in-out infinite}
+.ambient .b2{width:520px; height:520px; background:var(--c1); top:220px; right:-200px; animation:drift2 32s ease-in-out infinite}
+.ambient .b3{width:460px; height:460px; background:var(--c3); bottom:-200px; left:26%; animation:drift3 38s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(90px,70px) scale(1.12)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-110px,90px) scale(.92)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-90px) scale(1.08)}}
+.grid-overlay{
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--border-soft) 1px, transparent 1px),
+                   linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+}
 
-  .role{font-size:17px; color:var(--muted); margin:0 0 4px}
-  .where{font-size:14px; color:var(--muted); margin:0 0 20px}
-  .where strong{color:var(--fg); font-weight:600}
-  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
-  .links a{
-    display:inline-block; padding:9px 16px; border:1px solid var(--line);
-    border-radius:8px; font-size:14px; background:var(--card);
-  }
-  .links a.primary{background:var(--accent); border-color:var(--accent); color:#fff}
-  .links a.primary:hover{text-decoration:none; opacity:.9}
+/* ---------- progress + nav ---------- */
+#progress{position:fixed; top:0; left:0; height:2px; width:0; z-index:60;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3)); transition:width .1s linear}
+nav{
+  position:fixed; top:0; left:0; right:0; height:var(--nav-h); z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; border-bottom:1px solid transparent; transition:all .35s ease;
+}
+nav.scrolled{
+  background:color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom-color:var(--border);
+}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; letter-spacing:-.02em}
+.brand .mark{
+  width:32px; height:32px; border-radius:9px; display:grid; place-items:center;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  color:#04070c; font-family:"JetBrains Mono",monospace; font-size:15px; font-weight:700;
+  box-shadow:0 0 0 1px var(--border), 0 8px 24px -8px var(--glow);
+}
+.brand span{font-size:14px}
+.nav-links{display:none; gap:30px; font-size:14px; color:var(--text-dim)}
+@media(min-width:820px){.nav-links{display:flex}}
+.nav-links a{position:relative; padding:4px 0; transition:color .2s}
+.nav-links a::after{content:""; position:absolute; left:0; bottom:-2px; height:1.5px; width:0;
+  background:linear-gradient(90deg,var(--c1),var(--c2)); transition:width .28s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-tools{display:flex; align-items:center; gap:8px}
+.pill-btn{
+  border:1px solid var(--border); background:var(--surface); color:var(--text-dim);
+  font:inherit; font-size:12px; font-weight:500; padding:6px 11px; border-radius:8px;
+  cursor:pointer; transition:all .22s ease; display:flex; align-items:center; gap:6px;
+}
+.pill-btn:hover{color:var(--text); border-color:var(--c1); transform:translateY(-1px)}
+.pill-btn[aria-pressed="true"]{background:var(--surface-2); color:var(--c1); border-color:var(--c1)}
+.seg{display:flex; gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden}
+.seg button{border:0; border-radius:0; background:transparent; padding:6px 10px}
+.seg button + button{border-left:1px solid var(--border)}
+#theme svg{width:14px; height:14px}
 
-  .lede{font-size:17px; margin-top:28px}
+/* ---------- layout ---------- */
+main{position:relative; z-index:1}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+section{padding:96px 0; position:relative}
+.sec-head{margin-bottom:44px}
+.sec-num{
+  font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--c1);
+  letter-spacing:.14em; display:block; margin-bottom:10px; opacity:.9;
+}
+.sec-title{font-size:clamp(26px,4vw,38px); font-weight:700; letter-spacing:-.03em; line-height:1.15}
+.sec-sub{color:var(--text-dim); font-size:15px; margin-top:10px; max-width:62ch}
 
-  .card{
-    border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--card); padding:20px 22px; margin-bottom:14px;
-  }
-  .card .tag{
-    display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--ok); background:var(--ok-soft); border-radius:5px;
-    padding:2px 8px; margin-left:8px; vertical-align:2px; font-weight:600;
-  }
-  .card .meta{font-size:13px; color:var(--muted); margin:0 0 10px}
-  .card p{font-size:15px; margin-bottom:10px}
-  .facts{font-size:14px; color:var(--muted)}
-  .facts li{margin-bottom:4px}
-  .stack{font-size:13px; color:var(--muted); margin:12px 0 0;
-         font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+/* ---------- hero ---------- */
+.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-h) + 40px); padding-bottom:80px}
+.hero-inner{max-width:820px}
+.status{
+  display:inline-flex; align-items:center; gap:9px; font-size:13px; color:var(--text-dim);
+  border:1px solid var(--border); background:color-mix(in srgb,var(--surface) 70%,transparent);
+  backdrop-filter:blur(8px); padding:7px 15px; border-radius:999px; margin-bottom:30px;
+}
+.dot{width:7px; height:7px; border-radius:50%; background:#34d399; position:relative}
+.dot::after{content:""; position:absolute; inset:-4px; border-radius:50%; background:#34d399;
+  opacity:.35; animation:ping 2.2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(.7); opacity:.5}70%,100%{transform:scale(1.9); opacity:0}}
+h1{
+  font-size:clamp(38px,7.2vw,74px); font-weight:800; letter-spacing:-.045em; line-height:1.02;
+  margin-bottom:20px;
+}
+h1 .grad{
+  background:linear-gradient(105deg,var(--c1),var(--c2) 45%,var(--c3));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:220% 100%; animation:sheen 9s ease-in-out infinite;
+}
+@keyframes sheen{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-role{font-size:clamp(17px,2.4vw,21px); color:var(--text-dim); font-weight:500; margin-bottom:22px}
+.hero-pitch{font-size:17px; color:var(--text-dim); max-width:60ch; margin-bottom:34px}
+.hero-pitch strong{color:var(--text); font-weight:600}
+.cta{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:56px}
+.btn{
+  display:inline-flex; align-items:center; gap:9px; padding:13px 22px; border-radius:11px;
+  font-size:14.5px; font-weight:600; transition:all .25s cubic-bezier(.2,.7,.3,1);
+  border:1px solid var(--border); background:var(--surface); color:var(--text);
+}
+.btn:hover{transform:translateY(-2px); border-color:var(--c1); box-shadow:0 12px 30px -12px var(--glow)}
+.btn.primary{
+  background:linear-gradient(135deg,var(--c1),var(--c2)); color:#04070c; border-color:transparent;
+}
+.btn.primary:hover{box-shadow:0 16px 38px -12px rgba(34,211,238,.45)}
+.btn svg{width:15px; height:15px}
 
-  .skills{display:grid; grid-template-columns:1fr; gap:18px}
-  @media (min-width:640px){ .skills{grid-template-columns:1fr 1fr} }
-  .skills h4{font-size:14px; margin:0 0 5px; font-weight:600}
-  .skills p{font-size:14px; color:var(--muted); margin:0}
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; max-width:640px}
+@media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat .n{
+  font-size:clamp(24px,3.4vw,32px); font-weight:700; letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums; line-height:1.1;
+  background:linear-gradient(135deg,var(--text),var(--text-dim));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.stat .l{font-size:12.5px; color:var(--text-faint); margin-top:5px; line-height:1.4}
 
-  .entry{border-left:2px solid var(--accent); padding-left:16px; margin-bottom:22px}
-  .entry h3{font-size:16px}
-  .entry .org{font-size:14px; font-weight:600; margin:0 0 2px}
-  .entry .meta{font-size:13px; color:var(--muted); margin:0 0 8px}
-  .entry ul{font-size:14px; margin-bottom:8px}
-  .entry code{font-size:12px; color:var(--muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.scroll-hint{
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-faint);
+}
+.scroll-hint .line{width:1px; height:38px; background:linear-gradient(var(--c1),transparent);
+  animation:drop 2s ease-in-out infinite}
+@keyframes drop{0%,100%{opacity:.25; transform:scaleY(.6)}50%{opacity:1; transform:scaleY(1)}}
 
-  footer{margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
-         font-size:13px; color:var(--muted)}
-  .todo{background:#fff4e0; border:1px dashed #d59a2a; color:#5a3c05;
-        border-radius:8px; padding:10px 13px; font-size:13px; margin:8px 0 0}
-  @media (prefers-color-scheme: dark){
-    .todo{background:#2a2110; border-color:#8a6a1f; color:#f0d8a8}
-  }
-  .todo b{font-weight:600}
-  [hidden]{display:none !important}
+/* ---------- cards ---------- */
+.card{
+  position:relative; border:1px solid var(--border); border-radius:var(--r-lg);
+  background:color-mix(in srgb,var(--surface) 82%,transparent);
+  backdrop-filter:blur(12px); padding:30px; overflow:hidden;
+  transition:transform .4s cubic-bezier(.2,.7,.3,1), border-color .4s, box-shadow .4s;
+}
+.card::before{
+  content:""; position:absolute; inset:0; opacity:0; transition:opacity .4s;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%), var(--glow), transparent 42%);
+  pointer-events:none;
+}
+.card:hover{transform:translateY(-5px); border-color:color-mix(in srgb,var(--c1) 55%,var(--border)); box-shadow:var(--shadow)}
+.card:hover::before{opacity:1}
+.card-head{display:flex; align-items:flex-start; justify-content:space-between; gap:18px; margin-bottom:16px}
+.card h3{font-size:20px; font-weight:700; letter-spacing:-.02em; display:flex; align-items:center; gap:11px; flex-wrap:wrap}
+.chip{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  padding:4px 9px; border-radius:6px; border:1px solid color-mix(in srgb,var(--c1) 40%,transparent);
+  color:var(--c1); background:color-mix(in srgb,var(--c1) 10%,transparent); font-weight:500;
+}
+.card .lede{font-size:15px; color:var(--text-dim); margin-bottom:20px}
+.card .lede em{color:var(--text); font-style:normal; font-weight:600}
+.kv{display:grid; gap:11px; margin-bottom:22px}
+.kv div{display:grid; grid-template-columns:auto 1fr; gap:12px; font-size:14px; align-items:baseline}
+.kv .k{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--text-faint); white-space:nowrap}
+.kv .v{color:var(--text-dim)}
+.kv .v b{color:var(--text); font-weight:600}
+.stack{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px}
+.stack span{
+  font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--text-dim);
+  border:1px solid var(--border); border-radius:7px; padding:4px 10px; background:var(--surface-2);
+  transition:all .25s ease;
+}
+.card:hover .stack span{border-color:color-mix(in srgb,var(--c1) 30%,var(--border))}
+.link-arrow{
+  display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--c1);
+}
+.link-arrow svg{width:15px; height:15px; transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.link-arrow:hover svg{transform:translateX(5px)}
+.proj-grid{display:grid; gap:22px}
+@media(min-width:900px){.proj-grid{grid-template-columns:1fr 1fr}}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative; padding-left:34px}
+.timeline::before{
+  content:""; position:absolute; left:9px; top:8px; bottom:8px; width:1px;
+  background:linear-gradient(var(--c1),var(--c2) 55%,transparent);
+}
+.tl-item{position:relative; padding-bottom:42px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item .node{
+  position:absolute; left:-33px; top:7px; width:19px; height:19px; border-radius:50%;
+  border:1.5px solid var(--border); background:var(--bg); display:grid; place-items:center;
+}
+.tl-item .node i{width:7px; height:7px; border-radius:50%; background:var(--c1); display:block}
+.tl-item:first-child .node i{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1); opacity:1}50%{transform:scale(1.45); opacity:.6}}
+.tl-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:3px}
+.tl-top h3{font-size:17.5px; font-weight:700; letter-spacing:-.015em}
+.tl-org{color:var(--c1); font-size:14.5px; font-weight:600}
+.tl-date{
+  font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--text-faint);
+  margin-bottom:12px; display:block;
+}
+.tl-item ul{list-style:none; display:grid; gap:8px}
+.tl-item li{position:relative; padding-left:20px; font-size:14.5px; color:var(--text-dim)}
+.tl-item li::before{
+  content:""; position:absolute; left:2px; top:10px; width:5px; height:5px; border-radius:50%;
+  background:var(--c2);
+}
+.tl-item .stack{margin-top:16px; margin-bottom:0}
+
+/* ---------- skills bento ---------- */
+.bento{display:grid; gap:16px; grid-template-columns:1fr}
+@media(min-width:700px){.bento{grid-template-columns:repeat(6,1fr)}}
+.bento .card{padding:24px}
+.bento .card:nth-child(1){grid-column:span 6}
+.bento .card:nth-child(2){grid-column:span 3}
+.bento .card:nth-child(3){grid-column:span 3}
+.bento .card:nth-child(4){grid-column:span 2}
+.bento .card:nth-child(5){grid-column:span 2}
+.bento .card:nth-child(6){grid-column:span 2}
+@media(max-width:699px){.bento .card{grid-column:span 1 !important}}
+.bento h4{
+  font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--c1); margin-bottom:14px; font-weight:500;
+}
+.bento .card:hover{transform:translateY(-4px)}
+
+/* ---------- certs ---------- */
+.cert-grid{display:grid; gap:16px}
+@media(min-width:760px){.cert-grid{grid-template-columns:1fr 1fr}}
+.cert{display:flex; gap:16px; align-items:flex-start}
+.cert .ico{
+  flex:0 0 40px; height:40px; border-radius:11px; display:grid; place-items:center;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--c1) 22%,transparent),color-mix(in srgb,var(--c2) 22%,transparent));
+  border:1px solid var(--border);
+}
+.cert .ico svg{width:18px; height:18px}
+.cert h3{font-size:15.5px; font-weight:600; line-height:1.35; margin-bottom:5px}
+.cert .meta{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--text-faint)}
+.todo{
+  border:1px dashed color-mix(in srgb,#d59a2a 60%,var(--border)); border-radius:9px;
+  padding:9px 12px; font-size:12.5px; color:#d9a441; margin-top:10px;
+  background:color-mix(in srgb,#d59a2a 8%,transparent);
+}
+html[data-theme="light"] .todo{color:#8a5b00}
+
+/* ---------- footer ---------- */
+footer{position:relative; z-index:1; border-top:1px solid var(--border); padding:80px 0 56px; margin-top:40px}
+.foot-cta{font-size:clamp(28px,5vw,50px); font-weight:800; letter-spacing:-.04em; line-height:1.1; margin-bottom:22px}
+.foot-cta a{
+  background:linear-gradient(105deg,var(--c1),var(--c2) 50%,var(--c3));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:220% 100%; animation:sheen 9s ease-in-out infinite;
+}
+.foot-meta{
+  display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between;
+  align-items:center; font-size:13px; color:var(--text-faint); margin-top:44px;
+  padding-top:26px; border-top:1px solid var(--border-soft);
+}
+.foot-meta a{transition:color .2s}
+.foot-meta a:hover{color:var(--c1)}
+
+/* ---------- reveal ---------- */
+.js .reveal{opacity:0; transform:translateY(26px)}
+.js .reveal.in{
+  opacity:1; transform:none;
+  transition:opacity .85s cubic-bezier(.2,.7,.3,1) var(--d,0ms),
+             transform .85s cubic-bezier(.2,.7,.3,1) var(--d,0ms);
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  .js .reveal{opacity:1 !important; transform:none !important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="lang">
-    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">EN</button>
-    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">FR</button>
+<div id="progress"></div>
+<div class="ambient" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+</div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="brand" href="#top">
+    <span class="mark">B</span>
+    <span>Bryand&nbsp;Tamouffe</span>
+  </a>
+  <div class="nav-links">
+    <a href="#projects"><span data-lang="en">Projects</span><span data-lang="fr" hidden>Projets</span></a>
+    <a href="#experience"><span data-lang="en">Experience</span><span data-lang="fr" hidden>Expérience</span></a>
+    <a href="#skills"><span data-lang="en">Skills</span><span data-lang="fr" hidden>Compétences</span></a>
+    <a href="#credentials"><span data-lang="en">Credentials</span><span data-lang="fr" hidden>Diplômes</span></a>
   </div>
-
-  <header>
-    <h1>Ulrich Bryand Tamouffe Teyo</h1>
-    <p class="role">
-      <span data-lang="en">DevSecOps &amp; Cybersecurity Engineer</span>
-      <span data-lang="fr" hidden>Ingénieur DevSecOps &amp; Cybersécurité</span>
-    </p>
-    <p class="where">
-      Douala, Cameroon ·
-      <strong>
-        <span data-lang="en">open to relocation (Canada, francophone mobility) and remote</span>
-        <span data-lang="fr" hidden>ouvert à la relocalisation (Canada, mobilité francophone) et au télétravail</span>
-      </strong>
-    </p>
-    <div class="links">
-      <a class="primary" href="mailto:bryandtamouffe@gmail.com">bryandtamouffe@gmail.com</a>
-      <a href="https://github.com/bryand410">GitHub</a>
-      <a href="https://github.com/bryand410/llm-sentinel">llm-sentinel</a>
+  <div class="nav-tools">
+    <div class="seg">
+      <button class="pill-btn" id="btn-en" aria-pressed="true" onclick="setLang('en')">EN</button>
+      <button class="pill-btn" id="btn-fr" aria-pressed="false" onclick="setLang('fr')">FR</button>
     </div>
-  </header>
-
-  <p class="lede">
-    <span data-lang="en">Software engineering graduate, 1+ year across DevSecOps and data engineering. I build tooling that detects and blocks attacks against LLM applications — and I ship it: tests, CI, Docker, honest benchmarks.</span>
-    <span data-lang="fr" hidden>Diplômé en génie logiciel, 1+ an en DevSecOps et ingénierie de données. Je construis des outils qui détectent et bloquent les attaques contre les applications LLM — et je les livre vraiment : tests, CI, Docker, benchmarks honnêtes.</span>
-  </p>
-
-  <h2><span data-lang="en">Projects</span><span data-lang="fr" hidden>Projets</span></h2>
-
-  <article class="card">
-    <h3>llm-sentinel <span class="tag">Open source · MIT</span></h3>
-    <p class="meta">
-      <span data-lang="en">AI security gateway — Python, PyTorch, FastAPI, Docker</span>
-      <span data-lang="fr" hidden>Passerelle de sécurité IA — Python, PyTorch, FastAPI, Docker</span>
-    </p>
-    <p>
-      <span data-lang="en">A guardrail that classifies a prompt as <em>safe</em> or <em>injection</em> before it reaches the model. Most guardrails are either a regex list or an API call to someone else's cloud; this one is a small fine-tuned transformer that runs entirely on your own machine, on CPU — which is the point when the text you are screening is the text you were trying not to leak.</span>
-      <span data-lang="fr" hidden>Un garde-fou qui classe un prompt en <em>sûr</em> ou <em>injection</em> avant qu'il n'atteigne le modèle. La plupart des garde-fous sont soit une liste de regex, soit un appel à l'API cloud d'un tiers ; celui-ci est un petit transformer fine-tuné qui tourne entièrement sur ta machine, sur CPU — ce qui est tout l'intérêt quand le texte que tu filtres est celui que tu cherchais à ne pas laisser fuiter.</span>
-    </p>
-    <ul class="facts">
-      <li><span data-lang="en">Fine-tuned 4.4M-parameter encoder (<code>bert-tiny</code>), binary sequence classification</span><span data-lang="fr" hidden>Encodeur de 4,4 M de paramètres fine-tuné (<code>bert-tiny</code>), classification binaire</span></li>
-      <li><span data-lang="en">Under 50 ms per request on CPU</span><span data-lang="fr" hidden>Moins de 50 ms par requête sur CPU</span></li>
-      <li><span data-lang="en">Trained on <code>deepset/prompt-injections</code> plus hand-written bilingual FR/EN cases</span><span data-lang="fr" hidden>Entraîné sur <code>deepset/prompt-injections</code> plus des cas bilingues FR/EN écrits à la main</span></li>
-      <li><span data-lang="en">88.6% on its own 35-case bench — including the four cases it gets wrong, which are documented rather than hidden</span><span data-lang="fr" hidden>88,6 % sur son propre banc de 35 cas — y compris les quatre cas qu'il rate, documentés plutôt que cachés</span></li>
-      <li><span data-lang="en">FastAPI service, dashboard, pytest suite, GitHub Actions CI (lint, tests, Docker build)</span><span data-lang="fr" hidden>Service FastAPI, dashboard, suite pytest, CI GitHub Actions (lint, tests, build Docker)</span></li>
-    </ul>
-    <p class="meta" style="margin-top:12px">
-      <a href="https://github.com/bryand410/llm-sentinel">
-        <span data-lang="en">Read the code →</span><span data-lang="fr" hidden>Lire le code →</span>
-      </a>
-    </p>
-  </article>
-
-  <article class="card">
-    <h3>cmg-exploitation</h3>
-    <p class="meta">
-      <span data-lang="en">Production &amp; maintenance tracking — Python, PostgreSQL, Supabase</span>
-      <span data-lang="fr" hidden>Suivi de production et de maintenance — Python, PostgreSQL, Supabase</span>
-    </p>
-    <p>
-      <span data-lang="en">An operations application for an industrial group running four sites (quarrying and concrete). Tracks production, equipment maintenance and interventions, with role-based access separating field operators from management.</span>
-      <span data-lang="fr" hidden>Une application d'exploitation pour un groupe industriel de quatre sites (carrières et centrale à béton). Suivi de la production, de la maintenance des engins et des interventions, avec des accès différenciés entre opérateurs terrain et direction.</span>
-    </p>
-    <p class="meta" style="margin-top:12px">
-      <a href="https://github.com/bryand410/cmg-exploitation">
-        <span data-lang="en">See the repository →</span><span data-lang="fr" hidden>Voir le dépôt →</span>
-      </a>
-    </p>
-  </article>
-
-  <h2><span data-lang="en">Experience</span><span data-lang="fr" hidden>Expérience</span></h2>
-
-  <div class="entry">
-    <p class="org">ALFYNS Group</p>
-    <h3>
-      <span data-lang="en">DevSecOps Engineer</span>
-      <span data-lang="fr" hidden>Ingénieur DevSecOps</span>
-    </h3>
-    <p class="meta">Douala, Cameroon · Jan 2025 – Jul 2025</p>
-    <ul>
-      <li><span data-lang="en">Built a secured CI/CD pipeline for FinTech applications on AWS EKS</span><span data-lang="fr" hidden>Mise en place d'un pipeline CI/CD sécurisé pour applications FinTech sur AWS EKS</span></li>
-      <li><span data-lang="en">Integrated SAST/DAST and policy-as-code into GitLab CI</span><span data-lang="fr" hidden>Intégration d'outils SAST/DAST et de policy-as-code dans GitLab CI</span></li>
-      <li><span data-lang="en">Automated infrastructure with Terraform, multi-account and Zero-Trust</span><span data-lang="fr" hidden>Automatisation de l'infrastructure avec Terraform, multi-comptes et Zero-Trust</span></li>
-      <li><span data-lang="en">Observability with Prometheus, Grafana and the ELK stack, with real-time security alerting</span><span data-lang="fr" hidden>Observabilité avec Prometheus, Grafana et la stack ELK, alerting sécurité temps réel</span></li>
-    </ul>
-    <p class="stack">AWS · Kubernetes · Terraform · Python · Go · Vault · Trivy · GitLab CI</p>
+    <button class="pill-btn" id="theme" onclick="toggleTheme()" aria-label="Toggle colour theme">
+      <svg id="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </button>
   </div>
+</nav>
 
-  <div class="entry">
-    <p class="org">SECEL Group</p>
-    <h3>
-      <span data-lang="en">DevSecOps / Data Engineer</span>
-      <span data-lang="fr" hidden>Ingénieur DevSecOps / Data</span>
-    </h3>
-    <p class="meta">Douala, Cameroon · Jan 2023 – Jun 2024</p>
-    <ul>
-      <li><span data-lang="en">Designed a Spark/Kafka pipeline for transactional data processing</span><span data-lang="fr" hidden>Conception d'un pipeline Big Data Spark/Kafka pour le traitement de données transactionnelles</span></li>
-      <li><span data-lang="en">Built Power BI dashboards for management: financial KPIs and risk analysis</span><span data-lang="fr" hidden>Développement de dashboards BI Power BI pour la direction : KPIs financiers et analyse de risque</span></li>
-      <li><span data-lang="en">Modelled a data warehouse for business analytics and optimised SQL queries</span><span data-lang="fr" hidden>Modélisation d'un Data Warehouse pour le Business Analytics et optimisation des requêtes SQL</span></li>
-      <li><span data-lang="en">Implemented ML fraud-detection models (XGBoost)</span><span data-lang="fr" hidden>Implémentation de modèles ML de détection de fraude (XGBoost)</span></li>
-    </ul>
-    <p class="stack">Spark · Hadoop · Python · SQL · Power BI · AWS S3 · Airflow</p>
-  </div>
+<main>
 
-  <h2><span data-lang="en">Skills</span><span data-lang="fr" hidden>Compétences</span></h2>
-  <div class="skills">
-    <div>
-      <h4><span data-lang="en">Security</span><span data-lang="fr" hidden>Sécurité</span></h4>
-      <p><span data-lang="en">Prompt-injection and jailbreak detection, LLM attack surfaces, SAST/DAST, policy-as-code, secrets handling, Zero-Trust</span><span data-lang="fr" hidden>Détection d'injection de prompt et de jailbreak, surfaces d'attaque des LLM, SAST/DAST, policy-as-code, gestion des secrets, Zero-Trust</span></p>
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="status reveal">
+          <span class="dot"></span>
+          <span data-lang="en">Open to relocation — Canada (francophone mobility) &amp; remote</span>
+          <span data-lang="fr" hidden>Ouvert à la relocalisation — Canada (mobilité francophone) &amp; télétravail</span>
+        </div>
+
+        <h1 class="reveal" style="--d:80ms">
+          Ulrich Bryand<br><span class="grad">Tamouffe Teyo</span>
+        </h1>
+
+        <p class="hero-role reveal" style="--d:160ms">
+          <span data-lang="en">DevSecOps &amp; Cybersecurity Engineer</span>
+          <span data-lang="fr" hidden>Ingénieur DevSecOps &amp; Cybersécurité</span>
+        </p>
+
+        <p class="hero-pitch reveal" style="--d:240ms">
+          <span data-lang="en">I build tooling that detects and blocks attacks against LLM applications — and I <strong>ship it</strong>: tests, CI, Docker, and benchmarks that include the cases my model gets wrong.</span>
+          <span data-lang="fr" hidden>Je construis des outils qui détectent et bloquent les attaques contre les applications LLM — et je les <strong>livre vraiment</strong> : tests, CI, Docker, et des benchmarks qui incluent les cas que mon modèle rate.</span>
+        </p>
+
+        <div class="cta reveal" style="--d:320ms">
+          <a class="btn primary" href="mailto:bryandtamouffe@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            <span data-lang="en">Get in touch</span><span data-lang="fr" hidden>Me contacter</span>
+          </a>
+          <a class="btn" href="https://github.com/bryand410" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://github.com/bryand410/llm-sentinel" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+            llm-sentinel
+          </a>
+        </div>
+
+        <div class="stats reveal" style="--d:400ms">
+          <div class="stat"><div class="n" data-count="1" data-suffix="+">0</div>
+            <div class="l"><span data-lang="en">year of<br>experience</span><span data-lang="fr" hidden>an<br>d'expérience</span></div></div>
+          <div class="stat"><div class="n" data-count="2">0</div>
+            <div class="l"><span data-lang="en">Oracle<br>certifications</span><span data-lang="fr" hidden>certifications<br>Oracle</span></div></div>
+          <div class="stat"><div class="n" data-count="35">0</div>
+            <div class="l"><span data-lang="en">adversarial<br>test cases</span><span data-lang="fr" hidden>cas de test<br>adversariaux</span></div></div>
+          <div class="stat"><div class="n" data-count="88.6" data-dec="1" data-suffix="%">0</div>
+            <div class="l"><span data-lang="en">bench score,<br>failures published</span><span data-lang="fr" hidden>score du banc,<br>échecs publiés</span></div></div>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4><span data-lang="en">Cloud &amp; infrastructure</span><span data-lang="fr" hidden>Cloud &amp; infrastructure</span></h4>
-      <p><span data-lang="en">AWS (EKS, S3), Oracle Cloud Infrastructure, Docker, Kubernetes, Terraform, Ansible</span><span data-lang="fr" hidden>AWS (EKS, S3), Oracle Cloud Infrastructure, Docker, Kubernetes, Terraform, Ansible</span></p>
-    </div>
-    <div>
-      <h4><span data-lang="en">CI/CD &amp; observability</span><span data-lang="fr" hidden>CI/CD &amp; observabilité</span></h4>
-      <p><span data-lang="en">GitLab CI, GitHub Actions, Jenkins, Prometheus, Grafana, ELK, Vault, Trivy</span><span data-lang="fr" hidden>GitLab CI, GitHub Actions, Jenkins, Prometheus, Grafana, ELK, Vault, Trivy</span></p>
-    </div>
-    <div>
-      <h4><span data-lang="en">Machine learning</span><span data-lang="fr" hidden>Machine learning</span></h4>
-      <p><span data-lang="en">PyTorch, model fine-tuning, sequence classification, XGBoost, evaluation bench design</span><span data-lang="fr" hidden>PyTorch, fine-tuning de modèles, classification de séquences, XGBoost, conception de bancs d'évaluation</span></p>
-    </div>
-    <div>
-      <h4><span data-lang="en">Programming &amp; data</span><span data-lang="fr" hidden>Programmation &amp; données</span></h4>
-      <p><span data-lang="en">Python, FastAPI, Go, Bash, SQL, PostgreSQL, Supabase, Spark, Hadoop, Airflow, Power BI</span><span data-lang="fr" hidden>Python, FastAPI, Go, Bash, SQL, PostgreSQL, Supabase, Spark, Hadoop, Airflow, Power BI</span></p>
-    </div>
-    <div>
-      <h4><span data-lang="en">Languages</span><span data-lang="fr" hidden>Langues</span></h4>
-      <p><span data-lang="en">French (native), English (B2)</span><span data-lang="fr" hidden>Français (natif), Anglais (B2)</span></p>
-    </div>
-  </div>
+    <div class="scroll-hint" aria-hidden="true"><span class="line"></span></div>
+  </section>
 
-  <h2><span data-lang="en">Education</span><span data-lang="fr" hidden>Formation</span></h2>
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">01 — <span data-lang="en">WORK</span><span data-lang="fr" hidden>TRAVAIL</span></span>
+        <h2 class="sec-title"><span data-lang="en">Things I've built</span><span data-lang="fr" hidden>Ce que j'ai construit</span></h2>
+        <p class="sec-sub"><span data-lang="en">Real repositories, with their tests and their known limits.</span><span data-lang="fr" hidden>De vrais dépôts, avec leurs tests et leurs limites connues.</span></p>
+      </div>
 
-  <div class="entry">
-    <p class="org">Institut Supérieur de Management et d'Entrepreneuriat (IME)</p>
-    <h3>
-      <span data-lang="en">Engineering degree, Software Engineering</span>
-      <span data-lang="fr" hidden>Diplôme d'ingénieur de conception, Génie logiciel</span>
-    </h3>
-    <p class="meta">
-      Douala, Cameroon · Oct 2020 – Jul 2025 ·
-      <span data-lang="en">graduated with distinction</span>
-      <span data-lang="fr" hidden>mention Bien</span>
+      <div class="proj-grid">
+        <article class="card reveal">
+          <div class="card-head">
+            <h3>llm-sentinel <span class="chip">Open source · MIT</span></h3>
+          </div>
+          <p class="lede">
+            <span data-lang="en">A guardrail that classifies a prompt as <em>safe</em> or <em>injection</em> before it reaches the model. Most guardrails are a regex list or an API call to someone else's cloud; this is a small fine-tuned transformer running entirely on your own machine, on CPU — which is the point when the text you screen is the text you were trying not to leak.</span>
+            <span data-lang="fr" hidden>Un garde-fou qui classe un prompt en <em>sûr</em> ou <em>injection</em> avant qu'il n'atteigne le modèle. La plupart des garde-fous sont une liste de regex ou un appel au cloud d'un tiers ; celui-ci est un petit transformer fine-tuné qui tourne entièrement sur ta machine, sur CPU — tout l'intérêt quand le texte filtré est celui qu'on cherchait à ne pas laisser fuiter.</span>
+          </p>
+          <div class="kv">
+            <div><span class="k">MODEL</span><span class="v"><span data-lang="en">Fine-tuned 4.4M-param encoder (<code>bert-tiny</code>)</span><span data-lang="fr" hidden>Encodeur 4,4 M de paramètres fine-tuné (<code>bert-tiny</code>)</span></span></div>
+            <div><span class="k">LATENCY</span><span class="v"><span data-lang="en"><b>Under 50 ms</b> per request, CPU only</span><span data-lang="fr" hidden><b>Moins de 50 ms</b> par requête, CPU uniquement</span></span></div>
+            <div><span class="k">BENCH</span><span class="v"><span data-lang="en"><b>88.6 %</b> over 35 cases — the 4 failures are documented</span><span data-lang="fr" hidden><b>88,6 %</b> sur 35 cas — les 4 échecs sont documentés</span></span></div>
+          </div>
+          <div class="stack"><span>Python</span><span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>pytest</span><span>GitHub Actions</span></div>
+          <a class="link-arrow" href="https://github.com/bryand410/llm-sentinel" target="_blank" rel="noopener">
+            <span data-lang="en">Read the code</span><span data-lang="fr" hidden>Lire le code</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+
+        <article class="card reveal" style="--d:100ms">
+          <div class="card-head">
+            <h3>cmg-exploitation</h3>
+          </div>
+          <p class="lede">
+            <span data-lang="en">An operations application for an industrial group running four sites — quarrying and concrete. Tracks production, equipment maintenance and field interventions, with role-based access separating operators from management.</span>
+            <span data-lang="fr" hidden>Une application d'exploitation pour un groupe industriel de quatre sites — carrières et centrale à béton. Suivi de la production, de la maintenance des engins et des interventions terrain, avec des accès différenciés entre opérateurs et direction.</span>
+          </p>
+          <div class="kv">
+            <div><span class="k">SCOPE</span><span class="v"><span data-lang="en">4 sites, production &amp; maintenance</span><span data-lang="fr" hidden>4 sites, production &amp; maintenance</span></span></div>
+            <div><span class="k">ACCESS</span><span class="v"><span data-lang="en">Role-based, operators vs. management</span><span data-lang="fr" hidden>Par rôle, opérateurs vs direction</span></span></div>
+          </div>
+          <div class="stack"><span>Python</span><span>PostgreSQL</span><span>Supabase</span></div>
+          <a class="link-arrow" href="https://github.com/bryand410/cmg-exploitation" target="_blank" rel="noopener">
+            <span data-lang="en">See the repository</span><span data-lang="fr" hidden>Voir le dépôt</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">02 — <span data-lang="en">EXPERIENCE</span><span data-lang="fr" hidden>EXPÉRIENCE</span></span>
+        <h2 class="sec-title"><span data-lang="en">Where I've worked</span><span data-lang="fr" hidden>Où j'ai travaillé</span></h2>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <span class="node"><i></i></span>
+          <div class="tl-top">
+            <h3><span data-lang="en">DevSecOps Engineer</span><span data-lang="fr" hidden>Ingénieur DevSecOps</span></h3>
+            <span class="tl-org">ALFYNS Group</span>
+          </div>
+          <span class="tl-date">Douala, Cameroon · Jan 2025 — Jul 2025</span>
+          <ul>
+            <li><span data-lang="en">Built a secured CI/CD pipeline for FinTech applications on AWS EKS</span><span data-lang="fr" hidden>Pipeline CI/CD sécurisé pour applications FinTech sur AWS EKS</span></li>
+            <li><span data-lang="en">Integrated SAST/DAST and policy-as-code into GitLab CI</span><span data-lang="fr" hidden>Intégration SAST/DAST et policy-as-code dans GitLab CI</span></li>
+            <li><span data-lang="en">Automated infrastructure with Terraform — multi-account, Zero-Trust</span><span data-lang="fr" hidden>Automatisation de l'infrastructure avec Terraform — multi-comptes, Zero-Trust</span></li>
+            <li><span data-lang="en">Observability with Prometheus, Grafana and the ELK stack, with real-time security alerting</span><span data-lang="fr" hidden>Observabilité Prometheus, Grafana et stack ELK, avec alerting sécurité temps réel</span></li>
+          </ul>
+          <div class="stack"><span>AWS EKS</span><span>Kubernetes</span><span>Terraform</span><span>Vault</span><span>Trivy</span><span>GitLab CI</span><span>Go</span></div>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="node"><i></i></span>
+          <div class="tl-top">
+            <h3><span data-lang="en">DevSecOps / Data Engineer</span><span data-lang="fr" hidden>Ingénieur DevSecOps / Data</span></h3>
+            <span class="tl-org">SECEL Group</span>
+          </div>
+          <span class="tl-date">Douala, Cameroon · Jan 2023 — Jun 2024</span>
+          <ul>
+            <li><span data-lang="en">Designed a Spark/Kafka pipeline for transactional data processing</span><span data-lang="fr" hidden>Conception d'un pipeline Spark/Kafka pour le traitement de données transactionnelles</span></li>
+            <li><span data-lang="en">Built Power BI dashboards for management — financial KPIs and risk analysis</span><span data-lang="fr" hidden>Dashboards Power BI pour la direction — KPIs financiers et analyse de risque</span></li>
+            <li><span data-lang="en">Modelled a data warehouse for business analytics and optimised SQL queries</span><span data-lang="fr" hidden>Modélisation d'un data warehouse pour le business analytics et optimisation des requêtes SQL</span></li>
+            <li><span data-lang="en">Implemented ML fraud-detection models with XGBoost</span><span data-lang="fr" hidden>Implémentation de modèles ML de détection de fraude avec XGBoost</span></li>
+          </ul>
+          <div class="stack"><span>Spark</span><span>Kafka</span><span>Hadoop</span><span>Airflow</span><span>Power BI</span><span>AWS S3</span><span>SQL</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">03 — <span data-lang="en">TOOLKIT</span><span data-lang="fr" hidden>OUTILS</span></span>
+        <h2 class="sec-title"><span data-lang="en">What I work with</span><span data-lang="fr" hidden>Ce avec quoi je travaille</span></h2>
+      </div>
+
+      <div class="bento">
+        <div class="card reveal">
+          <h4><span data-lang="en">Security</span><span data-lang="fr" hidden>Sécurité</span></h4>
+          <div class="stack">
+            <span>Prompt-injection detection</span><span>Jailbreak detection</span><span>LLM attack surfaces</span>
+            <span>SAST / DAST</span><span>Policy-as-code</span><span>Zero-Trust</span>
+            <span>Secrets management</span><span>Vulnerability scanning</span>
+          </div>
+        </div>
+        <div class="card reveal" style="--d:60ms">
+          <h4><span data-lang="en">Cloud &amp; infrastructure</span><span data-lang="fr" hidden>Cloud &amp; infrastructure</span></h4>
+          <div class="stack"><span>AWS EKS</span><span>AWS S3</span><span>Oracle Cloud</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>Ansible</span><span>Linux</span></div>
+        </div>
+        <div class="card reveal" style="--d:120ms">
+          <h4><span data-lang="en">Machine learning</span><span data-lang="fr" hidden>Machine learning</span></h4>
+          <div class="stack"><span>PyTorch</span><span>Fine-tuning</span><span>Sequence classification</span><span>XGBoost</span><span>Benchmark design</span></div>
+        </div>
+        <div class="card reveal" style="--d:180ms">
+          <h4><span data-lang="en">CI/CD &amp; observability</span><span data-lang="fr" hidden>CI/CD &amp; observabilité</span></h4>
+          <div class="stack"><span>GitLab CI</span><span>GitHub Actions</span><span>Jenkins</span><span>Prometheus</span><span>Grafana</span><span>ELK</span><span>Vault</span><span>Trivy</span></div>
+        </div>
+        <div class="card reveal" style="--d:240ms">
+          <h4><span data-lang="en">Programming &amp; data</span><span data-lang="fr" hidden>Programmation &amp; données</span></h4>
+          <div class="stack"><span>Python</span><span>FastAPI</span><span>Go</span><span>Bash</span><span>SQL</span><span>PostgreSQL</span><span>Supabase</span><span>Spark</span><span>Hadoop</span><span>Airflow</span><span>Power BI</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CREDENTIALS ================= -->
+  <section id="credentials">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-num">04 — <span data-lang="en">CREDENTIALS</span><span data-lang="fr" hidden>DIPLÔMES</span></span>
+        <h2 class="sec-title"><span data-lang="en">Education &amp; certifications</span><span data-lang="fr" hidden>Formation &amp; certifications</span></h2>
+      </div>
+
+      <div class="cert-grid">
+        <div class="card cert reveal">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+          <div>
+            <h3><span data-lang="en">Engineering degree, Software Engineering</span><span data-lang="fr" hidden>Diplôme d'ingénieur de conception, Génie logiciel</span></h3>
+            <p class="meta">IME · Douala · 2020 — 2025 · <span data-lang="en">distinction</span><span data-lang="fr" hidden>mention Bien</span></p>
+          </div>
+        </div>
+
+        <div class="card cert reveal" style="--d:60ms">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18H7z"/><path d="M10 7h4M10 11h4M10 15h2"/></svg></span>
+          <div>
+            <h3><span data-lang="en">Baccalauréat, science track (C)</span><span data-lang="fr" hidden>Baccalauréat scientifique C</span></h3>
+            <p class="meta">Lycée Bilingue de Ndogpassi · 2019 — 2020</p>
+          </div>
+        </div>
+
+        <div class="card cert reveal" style="--d:120ms">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"/></svg></span>
+          <div>
+            <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
+            <p class="meta">Oracle · Dec 2025 · <span data-lang="en">ID</span><span data-lang="fr" hidden>ID</span> 103058206OCI25AICFA</p>
+          </div>
+        </div>
+
+        <div class="card cert reveal" style="--d:180ms">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"/></svg></span>
+          <div>
+            <h3>Oracle Fusion Cloud Applications ERP Process Essentials Certified — Rel 1</h3>
+            <p class="meta">Oracle · Dec 2025 · ID 103058206OMBPERPCFA1</p>
+          </div>
+        </div>
+
+        <div class="card cert reveal" style="--d:240ms">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4z"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <div>
+            <h3><span data-lang="en">Software Engineer</span><span data-lang="fr" hidden>Software Engineer</span></h3>
+            <p class="meta"><span data-lang="en">Dec 2025</span><span data-lang="fr" hidden>Déc 2025</span></p>
+            <p class="todo"><span data-lang="en">Issuer to confirm.</span><span data-lang="fr" hidden>Organisme émetteur à confirmer.</span></p>
+          </div>
+        </div>
+
+        <div class="card cert reveal" style="--d:300ms">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></span>
+          <div>
+            <h3>Python (Basic)</h3>
+            <p class="meta"><span data-lang="en">Dec 2025</span><span data-lang="fr" hidden>Déc 2025</span></p>
+            <p class="todo"><span data-lang="en">Issuer to confirm.</span><span data-lang="fr" hidden>Organisme émetteur à confirmer.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-cta reveal">
+      <span data-lang="en">Let's build something<br>that holds up.</span>
+      <span data-lang="fr" hidden>Construisons quelque chose<br>qui tient.</span>
     </p>
-  </div>
-
-  <div class="entry">
-    <p class="org">Lycée Bilingue de Ndogpassi</p>
-    <h3>
-      <span data-lang="en">Baccalauréat, science track (C)</span>
-      <span data-lang="fr" hidden>Baccalauréat scientifique C</span>
-    </h3>
-    <p class="meta">Douala, Cameroon · 2019 – 2020</p>
-  </div>
-
-  <h2><span data-lang="en">Certifications</span><span data-lang="fr" hidden>Certifications</span></h2>
-
-  <div class="entry">
-    <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
-    <p class="meta">Oracle · December 2025 · ID <code>103058206OCI25AICFA</code></p>
-  </div>
-
-  <div class="entry">
-    <h3>Oracle Fusion Cloud Applications ERP Process Essentials Certified — Rel 1</h3>
-    <p class="meta">Oracle · December 2025 · ID <code>103058206OMBPERPCFA1</code></p>
-  </div>
-
-  <div class="entry">
-    <h3>Software Engineer</h3>
-    <p class="meta">
-      <span data-lang="en">December 2025</span>
-      <span data-lang="fr" hidden>Décembre 2025</span>
-    </p>
-    <p class="todo"><b>À compléter :</b> organisme émetteur de ce certificat.</p>
-  </div>
-
-  <div class="entry">
-    <h3>Python (Basic)</h3>
-    <p class="meta">
-      <span data-lang="en">December 2025</span>
-      <span data-lang="fr" hidden>Décembre 2025</span>
-    </p>
-    <p class="todo"><b>À compléter :</b> organisme émetteur de ce certificat.</p>
-  </div>
-
-  <footer>
-    <p>
-      <a href="mailto:bryandtamouffe@gmail.com">bryandtamouffe@gmail.com</a> ·
-      <a href="https://github.com/bryand410">github.com/bryand410</a>
-    </p>
-    <p style="margin-top:10px">
+    <p class="sec-sub reveal" style="--d:80ms">
       <span data-lang="en">Available for DevSecOps, application security and ML engineering roles — Canada (francophone mobility), Europe, or remote.</span>
       <span data-lang="fr" hidden>Disponible pour des postes en DevSecOps, sécurité applicative et ingénierie ML — Canada (mobilité francophone), Europe ou télétravail.</span>
     </p>
-  </footer>
-
-</div>
+    <div class="cta reveal" style="--d:140ms">
+      <a class="btn primary" href="mailto:bryandtamouffe@gmail.com">bryandtamouffe@gmail.com</a>
+      <a class="btn" href="https://github.com/bryand410" target="_blank" rel="noopener">github.com/bryand410</a>
+    </div>
+    <div class="foot-meta">
+      <span>Ulrich Bryand Tamouffe Teyo · Douala, Cameroon</span>
+      <span data-lang="en">Built by hand — no framework, no build step.</span>
+      <span data-lang="fr" hidden>Écrit à la main — sans framework, sans build.</span>
+    </div>
+  </div>
+</footer>
 
 <script>
+document.documentElement.classList.add('js');
+
+/* ---------- theme ---------- */
+var SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+var MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>';
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('ico').innerHTML = (t === 'dark') ? SUN : MOON;
+  var m = document.querySelector('meta[name=theme-color]');
+  if (m) m.setAttribute('content', t === 'dark' ? '#0a0b0f' : '#ffffff');
+  try { localStorage.setItem('theme', t); } catch(e){}
+}
+function toggleTheme(){
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+(function(){
+  var t = null;
+  try { t = localStorage.getItem('theme'); } catch(e){}
+  if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  applyTheme(t);
+})();
+
+/* ---------- language ---------- */
 function setLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-lang]').forEach(function(el){
@@ -309,15 +661,78 @@ function setLang(lang){
   });
   document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
   document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr');
-  try { localStorage.setItem('lang', lang); } catch (e) {}
+  try { localStorage.setItem('lang', lang); } catch(e){}
 }
 (function(){
   var saved = null;
-  try { saved = localStorage.getItem('lang'); } catch (e) {}
-  if (!saved) {
-    saved = (navigator.language || 'en').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
-  }
+  try { saved = localStorage.getItem('lang'); } catch(e){}
+  if (!saved) saved = (navigator.language || 'en').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
   setLang(saved);
+})();
+
+/* ---------- reveal on scroll ---------- */
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+  items.forEach(function(el){ io.observe(el); });
+})();
+
+/* ---------- count up ---------- */
+(function(){
+  var nodes = document.querySelectorAll('[data-count]');
+  if (!nodes.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target; io.unobserve(el);
+      var target = parseFloat(el.dataset.count);
+      var dec = parseInt(el.dataset.dec || '0', 10);
+      var suf = el.dataset.suffix || '';
+      var start = performance.now(), dur = 1400;
+      (function step(now){
+        var p = Math.min((now - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec) + suf;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toFixed(dec) + suf;
+      })(start);
+    });
+  }, { threshold:0.5 });
+  nodes.forEach(function(el){ io.observe(el); });
+})();
+
+/* ---------- nav + progress ---------- */
+(function(){
+  var nav = document.getElementById('nav');
+  var bar = document.getElementById('progress');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle('scrolled', y > 20);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+})();
+
+/* ---------- pointer spotlight on cards ---------- */
+(function(){
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.card').forEach(function(card){
+    card.addEventListener('pointermove', function(ev){
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+  });
 })();
 </script>
 </body>
