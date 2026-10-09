@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ulrich Bryand Tamouffe Teyo — DevSecOps &amp; Cybersecurity Engineer</title>
+<meta name="description" content="DevSecOps and cybersecurity engineer. Python, PyTorch, FastAPI, Docker. I build tooling that detects and blocks attacks against LLM applications.">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#16181d; --muted:#5b6270; --line:#e3e6ec;
+    --card:#fafbfc; --accent:#1f5fa8; --accent-soft:#eef4fb;
+    --ok:#0f6e56; --ok-soft:#e6f5f0;
+    --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1115; --fg:#e8eaee; --muted:#98a0ae; --line:#262b33;
+      --card:#15181e; --accent:#7fb0ea; --accent-soft:#16222f;
+      --ok:#5dcaa5; --ok-soft:#12231d;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:16px; line-height:1.65;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 80px}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1{font-size:30px; line-height:1.2; margin:0 0 6px; font-weight:600; letter-spacing:-.01em}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted);
+     font-weight:600; margin:44px 0 16px}
+  h3{font-size:17px; margin:0 0 4px; font-weight:600}
+  p{margin:0 0 12px}
+  ul{margin:0; padding-left:20px}
+  li{margin-bottom:6px}
+
+  .lang{position:absolute; top:20px; right:24px; font-size:13px}
+  .lang button{
+    background:none; border:1px solid var(--line); color:var(--muted);
+    padding:4px 10px; border-radius:6px; cursor:pointer; font:inherit; font-size:12px;
+  }
+  .lang button[aria-pressed="true"]{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+
+  .role{font-size:17px; color:var(--muted); margin:0 0 4px}
+  .where{font-size:14px; color:var(--muted); margin:0 0 20px}
+  .where strong{color:var(--fg); font-weight:600}
+  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+  .links a{
+    display:inline-block; padding:9px 16px; border:1px solid var(--line);
+    border-radius:8px; font-size:14px; background:var(--card);
+  }
+  .links a.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+  .links a.primary:hover{text-decoration:none; opacity:.9}
+
+  .lede{font-size:17px; margin-top:28px}
+
+  .card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--card); padding:20px 22px; margin-bottom:14px;
+  }
+  .card .tag{
+    display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ok); background:var(--ok-soft); border-radius:5px;
+    padding:2px 8px; margin-left:8px; vertical-align:2px; font-weight:600;
+  }
+  .card .meta{font-size:13px; color:var(--muted); margin:0 0 10px}
+  .card p{font-size:15px; margin-bottom:10px}
+  .facts{font-size:14px; color:var(--muted); margin:0; padding-left:20px}
+  .facts li{margin-bottom:3px}
+
+  .skills{display:grid; grid-template-columns:1fr; gap:16px}
+  @media (min-width:640px){ .skills{grid-template-columns:1fr 1fr} }
+  .skills h4{font-size:14px; margin:0 0 6px; font-weight:600}
+  .skills p{font-size:14px; color:var(--muted); margin:0}
+
+  .cert{border-left:2px solid var(--accent); padding-left:16px; margin-bottom:16px}
+  .cert h3{font-size:15px}
+  .cert .meta{font-size:13px; color:var(--muted); margin:0}
+  .cert code{font-size:12px; color:var(--muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  footer{margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
+         font-size:13px; color:var(--muted)}
+  .todo{background:#fff4e0; border:1px dashed #d59a2a; color:#5a3c05;
+        border-radius:8px; padding:12px 14px; font-size:13px; margin:10px 0 0}
+  @media (prefers-color-scheme: dark){
+    .todo{background:#2a2110; border-color:#8a6a1f; color:#f0d8a8}
+  }
+  .todo b{font-weight:600}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="lang">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">EN</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">FR</button>
+  </div>
+
+  <header>
+    <h1>Ulrich Bryand Tamouffe Teyo</h1>
+    <p class="role">
+      <span data-lang="en">DevSecOps &amp; Cybersecurity Engineer</span>
+      <span data-lang="fr" hidden>Ingénieur DevSecOps &amp; Cybersécurité</span>
+    </p>
+    <p class="where">
+      Douala, Cameroon ·
+      <strong>
+        <span data-lang="en">open to relocation (Canada, francophone mobility) and remote</span>
+        <span data-lang="fr" hidden>ouvert à la relocalisation (Canada, mobilité francophone) et au télétravail</span>
+      </strong>
+    </p>
+    <div class="links">
+      <a class="primary" href="mailto:bryandtamouffe@gmail.com">bryandtamouffe@gmail.com</a>
+      <a href="https://github.com/bryand410">GitHub</a>
+      <a href="https://github.com/bryand410/llm-sentinel">llm-sentinel</a>
+    </div>
+  </header>
+
+  <p class="lede">
+    <span data-lang="en">I build tooling that detects and blocks attacks against LLM applications — and I ship it: tests, CI, Docker, honest benchmarks.</span>
+    <span data-lang="fr" hidden>Je construis des outils qui détectent et bloquent les attaques contre les applications LLM — et je les livre vraiment : tests, CI, Docker, benchmarks honnêtes.</span>
+  </p>
+
+  <h2><span data-lang="en">Projects</span><span data-lang="fr" hidden>Projets</span></h2>
+
+  <article class="card">
+    <h3>llm-sentinel <span class="tag">Open source · MIT</span></h3>
+    <p class="meta">
+      <span data-lang="en">AI security gateway — Python, PyTorch, FastAPI, Docker</span>
+      <span data-lang="fr" hidden>Passerelle de sécurité IA — Python, PyTorch, FastAPI, Docker</span>
+    </p>
+    <p>
+      <span data-lang="en">A guardrail that classifies a prompt as <em>safe</em> or <em>injection</em> before it reaches the model. Most guardrails are either a regex list or an API call to someone else's cloud; this one is a small fine-tuned transformer that runs entirely on your own machine, on CPU — which is the point when the text you are screening is the text you were trying not to leak.</span>
+      <span data-lang="fr" hidden>Un garde-fou qui classe un prompt en <em>sûr</em> ou <em>injection</em> avant qu'il n'atteigne le modèle. La plupart des garde-fous sont soit une liste de regex, soit un appel à l'API cloud d'un tiers ; celui-ci est un petit transformer fine-tuné qui tourne entièrement sur ta machine, sur CPU — ce qui est tout l'intérêt quand le texte que tu filtres est celui que tu cherchais à ne pas laisser fuiter.</span>
+    </p>
+    <ul class="facts">
+      <li><span data-lang="en">Fine-tuned 4.4M-parameter encoder (<code>bert-tiny</code>), binary sequence classification</span><span data-lang="fr" hidden>Encodeur de 4,4 M de paramètres fine-tuné (<code>bert-tiny</code>), classification binaire</span></li>
+      <li><span data-lang="en">Under 50 ms per request on CPU</span><span data-lang="fr" hidden>Moins de 50 ms par requête sur CPU</span></li>
+      <li><span data-lang="en">Trained on <code>deepset/prompt-injections</code> plus hand-written bilingual FR/EN cases</span><span data-lang="fr" hidden>Entraîné sur <code>deepset/prompt-injections</code> plus des cas bilingues FR/EN écrits à la main</span></li>
+      <li><span data-lang="en">88.6% on its own 35-case bench — including the four cases it gets wrong, which are documented</span><span data-lang="fr" hidden>88,6 % sur son propre banc de 35 cas — y compris les quatre cas qu'il rate, qui sont documentés</span></li>
+      <li><span data-lang="en">FastAPI service, dashboard, pytest suite, GitHub Actions CI (lint, tests, Docker build)</span><span data-lang="fr" hidden>Service FastAPI, dashboard, suite pytest, CI GitHub Actions (lint, tests, build Docker)</span></li>
+    </ul>
+    <p class="meta" style="margin-top:12px">
+      <a href="https://github.com/bryand410/llm-sentinel">
+        <span data-lang="en">Read the code →</span><span data-lang="fr" hidden>Lire le code →</span>
+      </a>
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>cmg-exploitation</h3>
+    <p class="meta">
+      <span data-lang="en">Production &amp; maintenance tracking — Python, PostgreSQL, Supabase</span>
+      <span data-lang="fr" hidden>Suivi de production et de maintenance — Python, PostgreSQL, Supabase</span>
+    </p>
+    <p>
+      <span data-lang="en">An operations application for an industrial group running four sites (quarrying and concrete). Tracks production, equipment maintenance and interventions, with role-based access separating field operators from management.</span>
+      <span data-lang="fr" hidden>Une application d'exploitation pour un groupe industriel de quatre sites (carrières et centrale à béton). Suivi de la production, de la maintenance des engins et des interventions, avec des accès différenciés entre opérateurs terrain et direction.</span>
+    </p>
+    <p class="meta" style="margin-top:12px">
+      <a href="https://github.com/bryand410/cmg-exploitation">
+        <span data-lang="en">See the repository →</span><span data-lang="fr" hidden>Voir le dépôt →</span>
+      </a>
+    </p>
+  </article>
+
+  <h2><span data-lang="en">Skills</span><span data-lang="fr" hidden>Compétences</span></h2>
+  <div class="skills">
+    <div>
+      <h4><span data-lang="en">Security</span><span data-lang="fr" hidden>Sécurité</span></h4>
+      <p><span data-lang="en">Prompt-injection and jailbreak detection, LLM attack surfaces, secure CI/CD, secrets handling</span><span data-lang="fr" hidden>Détection d'injection de prompt et de jailbreak, surfaces d'attaque des LLM, CI/CD sécurisée, gestion des secrets</span></p>
+    </div>
+    <div>
+      <h4><span data-lang="en">Machine learning</span><span data-lang="fr" hidden>Machine learning</span></h4>
+      <p><span data-lang="en">PyTorch, model fine-tuning, sequence classification, evaluation bench design</span><span data-lang="fr" hidden>PyTorch, fine-tuning de modèles, classification de séquences, conception de bancs d'évaluation</span></p>
+    </div>
+    <div>
+      <h4><span data-lang="en">Engineering</span><span data-lang="fr" hidden>Ingénierie</span></h4>
+      <p><span data-lang="en">Python, FastAPI, automated testing (pytest), clean architecture, Git</span><span data-lang="fr" hidden>Python, FastAPI, tests automatisés (pytest), architecture propre, Git</span></p>
+    </div>
+    <div>
+      <h4><span data-lang="en">Infrastructure</span><span data-lang="fr" hidden>Infrastructure</span></h4>
+      <p><span data-lang="en">Docker, Docker Compose, Linux, GitHub Actions</span><span data-lang="fr" hidden>Docker, Docker Compose, Linux, GitHub Actions</span></p>
+    </div>
+    <div>
+      <h4><span data-lang="en">Data</span><span data-lang="fr" hidden>Données</span></h4>
+      <p><span data-lang="en">PostgreSQL, Supabase, SQL</span><span data-lang="fr" hidden>PostgreSQL, Supabase, SQL</span></p>
+    </div>
+    <div>
+      <h4><span data-lang="en">Languages</span><span data-lang="fr" hidden>Langues</span></h4>
+      <p><span data-lang="en">French (native), English (working proficiency)</span><span data-lang="fr" hidden>Français (natif), Anglais (professionnel)</span></p>
+    </div>
+  </div>
+
+  <h2><span data-lang="en">Certifications</span><span data-lang="fr" hidden>Certifications</span></h2>
+
+  <div class="cert">
+    <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
+    <p class="meta">
+      <span data-lang="en">Oracle · December 2025 · ID <code>103058206OCI25AICFA</code></span>
+      <span data-lang="fr" hidden>Oracle · décembre 2025 · ID <code>103058206OCI25AICFA</code></span>
+    </p>
+  </div>
+
+  <div class="cert">
+    <h3>Oracle Fusion Cloud Applications ERP Process Essentials Certified — Rel 1</h3>
+    <p class="meta">
+      <span data-lang="en">Oracle · December 2025 · ID <code>103058206OMBPERPCFA1</code></span>
+      <span data-lang="fr" hidden>Oracle · décembre 2025 · ID <code>103058206OMBPERPCFA1</code></span>
+    </p>
+  </div>
+
+  <h2><span data-lang="en">Education</span><span data-lang="fr" hidden>Formation</span></h2>
+  <div class="cert">
+    <h3>IME — Institut Supérieur de Management et d'Entrepreneuriat</h3>
+    <p class="meta">Douala, Cameroon</p>
+    <p class="todo">
+      <b>À compléter :</b> intitulé exact du diplôme et année d'obtention.
+    </p>
+  </div>
+
+  <h2><span data-lang="en">Experience</span><span data-lang="fr" hidden>Expérience</span></h2>
+  <div class="cert">
+    <h3>SECEL — Douala, Cameroon</h3>
+    <p class="meta">
+      <span data-lang="en">DevOps Engineer / System Administrator</span>
+      <span data-lang="fr" hidden>Ingénieur DevOps / Administrateur système</span>
+    </p>
+    <p class="todo">
+      <b>À compléter :</b> mois et année de début et de fin, et deux ou trois réalisations
+      concrètes — ce que tu as fait, pas ce que ça a « amélioré de 40 % ».
+    </p>
+  </div>
+
+  <footer>
+    <p>
+      <a href="mailto:bryandtamouffe@gmail.com">bryandtamouffe@gmail.com</a> ·
+      <a href="https://github.com/bryand410">github.com/bryand410</a>
+    </p>
+    <p style="margin-top:10px">
+      <span data-lang="en">Available for DevSecOps, application security and ML engineering roles.</span>
+      <span data-lang="fr" hidden>Disponible pour des postes en DevSecOps, sécurité applicative et ingénierie ML.</span>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-lang]').forEach(function(el){
+    el.hidden = el.getAttribute('data-lang') !== lang;
+  });
+  document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+  document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr');
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  if (!saved) {
+    saved = (navigator.language || 'en').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  }
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
